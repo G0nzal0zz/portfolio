@@ -1,8 +1,8 @@
 // @ts-check
-import { tanstackConfig } from "@tanstack/eslint-config"
+import { tanstackConfig } from '@tanstack/eslint-config'
 
 const rules = {
-  quotes: ["error", "double"],
-} 
+  quotes: ['error', 'double'],
+}
 
 export default [...tanstackConfig, { rules }]

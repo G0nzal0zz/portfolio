@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { FaGithub } from 'react-icons/fa'
 import Header from '@/components/Header'
 
 export const Route = createFileRoute('/')({
@@ -46,9 +47,9 @@ function App() {
               href="https://github.com/G0nzal0zz/educational-multiparty-agents"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 inline-block text-gray-600 hover:text-blue-500"
+              className="mt-3 inline-block text-gray-600 hover:text-blue-500 text-2xl"
             >
-              GitHub
+              <FaGithub />
             </a>
           </div>
           <div className="p-6 border rounded-lg">

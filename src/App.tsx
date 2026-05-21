@@ -18,14 +18,16 @@ function Section({
   id,
   title,
   children,
+  className = '',
 }: {
   id: string
   title: string
   subtitle?: string
   children: ReactNode
+  className?: string
 }) {
   return (
-    <section id={id} className="global-margin py-16 md:py-20">
+    <section id={id} className={`global-margin py-16 md:py-20 ${className}`}>
       <div className="mb-10">
         <h2>{title}</h2>
       </div>
@@ -417,9 +419,9 @@ function App() {
 
       {/* Contact */}
       <div className="bg-slate-50">
-        <Section id="contact" title="Contact">
+        <Section id="contact" title="Contact" className="pb-8 md:pb-12">
           <p className="text-slate-500 text-sm mb-4 max-w-lg">
-            Feel free to reach out if you'd like to collaborate or just say hi.
+            Feel free to reach out!
           </p>
           <div className="flex gap-3">
             <a

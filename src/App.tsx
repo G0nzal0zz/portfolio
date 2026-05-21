@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+const base = import.meta.env.BASE_URL
 import {
   FaGithub,
   FaLinkedin,
@@ -196,7 +197,7 @@ function App() {
             <ProjectCard
               media={
                 <img
-                  src="/system.png"
+                  src={`${base}system.png`}
                   alt="System"
                   className="w-full aspect-[4/3] object-cover bg-slate-100"
                 />
@@ -256,7 +257,7 @@ function App() {
             <ProjectCard
               media={
                 <img
-                  src="/hide_and_peek.webp"
+                  src={`${base}hide_and_peek.webp`}
                   alt="System"
                   className="w-full aspect-[4/3] object-cover bg-slate-100"
                 />
@@ -266,7 +267,7 @@ function App() {
               tags={[
                 {
                   icon: (
-                    <img src="/rocq.svg" className="w-3.5 h-3.5" alt="Rocq" />
+                    <img src={`${base}rocq.svg`} className="w-3.5 h-3.5" alt="Rocq" />
                   ),
                   label: 'Rocq',
                 },
@@ -404,7 +405,7 @@ function App() {
       {/* CV */}
       <Section id="cv" title="CV">
         <a
-          href="/cv.pdf"
+          href={`${base}cv.pdf`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors duration-200"

@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react'
-import { createFileRoute } from '@tanstack/react-router'
 import {
   FaGithub,
   FaLinkedin,
@@ -13,10 +12,6 @@ import {
 } from 'react-icons/fa'
 import { SiPytorch, SiHaskell, SiLlvm, SiLangchain } from 'react-icons/si'
 import Header from '@/components/Header'
-
-export const Route = createFileRoute('/')({
-  component: App,
-})
 
 function Section({
   id,
@@ -456,3 +451,5 @@ function App() {
     </div>
   )
 }
+
+export default App

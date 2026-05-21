@@ -1,53 +1,52 @@
 @import 'tailwindcss';
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap';
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  @apply m-0;
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  @apply m-0 bg-white text-slate-800 overflow-x-hidden;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family:
-    source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 h1 {
-  @apply text-4xl md:text-5xl font-semibold tracking-tight leading-tight;
+  @apply text-4xl md:text-5xl font-bold tracking-tight text-slate-900;
 }
 
 h2 {
-  @apply text-3xl md:text-4xl font-medium tracking-tight leading-snug;
+  @apply text-2xl md:text-3xl font-semibold tracking-tight text-slate-900;
 }
 
 h3 {
-  @apply text-2xl md:text-3xl font-medium tracking-tight leading-snug;
+  @apply text-xl font-semibold text-slate-900;
 }
 
 h4 {
-  @apply text-xl md:text-2xl font-medium leading-snug;
+  @apply text-lg font-medium text-slate-900;
 }
 
-h5 {
-  @apply text-lg font-medium leading-snug text-gray-800;
-}
-
-h6 {
-  @apply text-base font-medium leading-snug text-gray-600 uppercase tracking-wide;
-}
-
-.big-title {
-  font-size: clamp(1.5rem, 6vw, 4rem); /* responsive scaling */
-  font-weight: 500; /* bold but not too heavy */
-  line-height: 1.1; /* tighter for big titles */
-  letter-spacing: -0.02em; /* subtle negative tracking */
-  color: #111; /* minimalist dark gray */
+p {
+  @apply text-base leading-relaxed;
 }
 
 .global-margin {
-  margin-inline: max(1.5rem, 5vw);
-  max-width: 100vw;
-  overflow-x: hidden;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: max(1.5rem, 5vw);
+}
+
+.section-bg {
+  @apply bg-slate-50 rounded-2xl;
+}
+
+.card-hover {
+  @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
 }

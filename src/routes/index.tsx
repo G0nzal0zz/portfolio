@@ -1,159 +1,457 @@
+import type { ReactNode } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { FaGithub } from 'react-icons/fa'
+import {
+  FaGithub,
+  FaLinkedin,
+  FaPython,
+  FaReact,
+  FaDatabase,
+  FaTools,
+  FaBook,
+  FaFilePdf,
+  FaEnvelope,
+} from 'react-icons/fa'
+import { SiPytorch, SiHaskell, SiLlvm, SiLangchain } from 'react-icons/si'
 import Header from '@/components/Header'
 
 export const Route = createFileRoute('/')({
   component: App,
 })
 
+function Section({
+  id,
+  title,
+  children,
+}: {
+  id: string
+  title: string
+  subtitle?: string
+  children: ReactNode
+}) {
+  return (
+    <section id={id} className="global-margin py-16 md:py-20">
+      <div className="mb-10">
+        <h2>{title}</h2>
+      </div>
+      {children}
+    </section>
+  )
+}
+
+function Card({
+  children,
+  className = '',
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <div
+      className={`p-6 border border-slate-200 rounded-xl card-hover bg-white ${className}`}
+    >
+      {children}
+    </div>
+  )
+}
+
+function Tag({ icon, label }: { icon: ReactNode; label: string }) {
+  return (
+    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-slate-100 rounded-md text-slate-600">
+      {icon}
+      {label}
+    </span>
+  )
+}
+
+type ProjectLink = {
+  href: string
+  icon: ReactNode
+  label: string
+}
+
+type ProjectCardProps = {
+  media?: ReactNode
+  title: string
+  description: string
+  tags: { icon: ReactNode; label: string }[]
+  links?: ProjectLink[]
+}
+
+function ProjectCard({
+  media,
+  title,
+  description,
+  tags,
+  links,
+}: ProjectCardProps) {
+  return (
+    <Card>
+      {media && <div className="-mx-6 -mt-6 mb-4">{media}</div>}
+      <h3 className="font-semibold text-lg">{title}</h3>
+      <p className="mt-1.5 text-slate-600 text-sm leading-relaxed">
+        {description}
+      </p>
+      <div className="mt-3 flex flex-wrap gap-1.5">
+        {tags.map((tag, i) => (
+          <Tag key={i} icon={tag.icon} label={tag.label} />
+        ))}
+      </div>
+      {links && links.length > 0 && (
+        <div className="mt-4 flex flex-row gap-4">
+          {links.map((link, i) => (
+            <a
+              key={i}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-blue-700 transition-colors duration-200"
+            >
+              {link.icon} {link.label}
+            </a>
+          ))}
+        </div>
+      )}
+    </Card>
+  )
+}
+
+type TechCardProps = {
+  icon: ReactNode
+  title: string
+  items: string[]
+}
+
+function TechCard({ icon, title, items }: TechCardProps) {
+  return (
+    <Card>
+      <div className="flex items-center gap-2 font-medium text-slate-900 text-sm">
+        <span className="text-blue-700">{icon}</span>
+        {title}
+      </div>
+      <p className="mt-2 text-slate-500 text-sm">{items.join(', ')}</p>
+    </Card>
+  )
+}
+
 function App() {
   return (
-    <div className="overflow-x-hidden">
+    <div className="text-slate-800">
       <Header />
 
-      {/* Hero Section */}
-      <section id="home" className="global-margin py-8">
-        <div className="big-title">Hi, I'm Gonzalo</div>
-        <h4 className="mt-4">
-          Junior Developer studying MSc in Artificial Intelligence
-        </h4>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="global-margin py-8">
-        <h2>About</h2>
-        <p className="mt-4 text-gray-600 max-w-2xl">
-          I'm a junior developer currently pursuing an MSc in Artificial
-          Intelligence. I have experience in web development and a growing
-          interest in machine learning and AI applications. I'm passionate about
-          building intelligent systems and solving complex problems through
-          code.
+      {/* Hero */}
+      <section
+        id="home"
+        className="global-margin pt-24 pb-16 md:pt-32 md:pb-20"
+      >
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
+          Gonzalo
+        </h1>
+        <p className="mt-4 text-slate-500 max-w-xl text-lg">
+          Junior Developer &middot; MSc Artificial Intelligence &middot;
+          Intelligent systems & formal methods
         </p>
       </section>
 
-      {/* Projects Section */}
-      <section id="projects" className="global-margin py-8">
-        <h2>Projects</h2>
-        <div className="mt-4 grid gap-6 md:grid-cols-2">
-          <div className="p-6 border rounded-lg">
-            <img
-              src="/system.png"
-              alt="System"
-              className="w-full h-48 object-contain rounded-lg bg-gray-100"
+      {/* About */}
+      <div className="bg-slate-50">
+        <Section id="about" title="About">
+          <p className="text-slate-600 max-w-2xl leading-relaxed">
+            I'm a junior developer pursuing an MSc in Artificial Intelligence. I
+            focus on building reliable, scalable systems and have a growing
+            interest in machine learning and formal verification.
+          </p>
+        </Section>
+      </div>
+
+      {/* Technologies */}
+      <Section id="technologies" title="Technologies">
+        <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <TechCard
+            icon={<FaPython />}
+            title="Languages"
+            items={['Python', 'TypeScript', 'JavaScript', 'Java']}
+          />
+          <TechCard
+            icon={<FaReact />}
+            title="Web"
+            items={['React', 'Vue', 'Node.js', 'HTML', 'CSS']}
+          />
+          <TechCard
+            icon={<FaDatabase />}
+            title="Databases"
+            items={['PostgreSQL', 'MySQL', 'MongoDB']}
+          />
+          <TechCard
+            icon={<FaTools />}
+            title="Tools"
+            items={['Git', 'Docker', 'AWS']}
+          />
+          <TechCard
+            icon={<SiPytorch />}
+            title="AI / ML"
+            items={['PyTorch', 'TensorFlow', 'LangChain']}
+          />
+        </div>
+      </Section>
+
+      {/* Projects */}
+      <div className="bg-slate-50">
+        <Section id="projects" title="Projects">
+          <div className="grid gap-6 md:grid-cols-2">
+            <ProjectCard
+              media={
+                <img
+                  src="/system.png"
+                  alt="System"
+                  className="w-full aspect-[4/3] object-cover bg-slate-100"
+                />
+              }
+              title="Educational Multiparty Agents"
+              description="Multi-agent educational system exploring collaborative AI interactions."
+              tags={[
+                { icon: <FaPython />, label: 'Python' },
+                { icon: <SiLangchain />, label: 'LangChain' },
+              ]}
+              links={[
+                {
+                  href: 'https://github.com/G0nzal0zz/educational-multiparty-agents',
+                  icon: <FaGithub />,
+                  label: 'Code',
+                },
+              ]}
             />
-            <h3 className="mt-4">Educational Multiparty Agents</h3>
-            <p className="mt-2 text-gray-600">Project description.</p>
+
+            <ProjectCard
+              media={
+                <div className="w-full aspect-[4/3] bg-slate-100">
+                  <iframe
+                    src="https://www.youtube.com/embed/UYt2HwnQzyE"
+                    title="Frostlang Demo"
+                    className="w-full h-full"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              }
+              title="Frostlang"
+              description="Programming language created in Haskell that combines the speed of C with modern language features."
+              tags={[
+                { icon: <SiHaskell />, label: 'Haskell' },
+                { icon: <SiLlvm />, label: 'LLVM' },
+              ]}
+              links={[
+                {
+                  href: 'https://github.com/G0nzal0zz/frostlang',
+                  icon: <FaGithub />,
+                  label: 'Code',
+                },
+                {
+                  href: 'https://g0nzal0zz.gitbook.io/frost/',
+                  icon: <FaBook />,
+                  label: 'Docs',
+                },
+                {
+                  href: 'https://g0nzal0zz.github.io/frostlang/',
+                  icon: <SiHaskell />,
+                  label: 'Haddock',
+                },
+              ]}
+            />
+
+            <ProjectCard
+              media={
+                <img
+                  src="/hide_and_peek.webp"
+                  alt="System"
+                  className="w-full aspect-[4/3] object-cover bg-slate-100"
+                />
+              }
+              title="(WII Party) Hide and Peek Strategy Verification"
+              description="Verification of a game strategy using Rocq proof assistant."
+              tags={[
+                {
+                  icon: (
+                    <img src="/rocq.svg" className="w-3.5 h-3.5" alt="Rocq" />
+                  ),
+                  label: 'Rocq',
+                },
+                { icon: <SiLlvm />, label: 'LLVM' },
+              ]}
+              links={[
+                {
+                  href: 'https://github.com/G0nzal0zz/hide_and_peek_verification',
+                  icon: <FaGithub />,
+                  label: 'Code',
+                },
+              ]}
+            />
+          </div>
+        </Section>
+      </div>
+
+      {/* Education & Experience */}
+      <div className="bg-slate-50">
+        <div className="global-margin py-16 md:py-20">
+          <div className="grid gap-12 md:grid-cols-2">
+            <section id="education">
+              <h2 className="text-2xl font-semibold tracking-tight text-slate-900 mb-8">
+                Education
+              </h2>
+              <div className="space-y-6">
+                <Card>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-900 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-slate-900">
+                        MSc Artificial Intelligence
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        Heriot-Watt University &middot; 2025–2026
+                      </p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Specialising in machine learning, NLP, and multi-agent
+                          systems
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-slate-900">
+                        BSc Software Engineering
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        Epitech &middot; 2022–2025
+                      </p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Project-based curriculum covering full-stack
+                          development, algorithms, and system design
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </section>
+
+            <section id="work">
+              <h2 className="text-2xl font-semibold tracking-tight text-slate-900 mb-8">
+                Experience
+              </h2>
+              <div className="space-y-6">
+                <Card>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-900 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-slate-900">
+                        Freelance
+                      </h3>
+                      <p className="text-slate-500 text-sm">2025 – Present</p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Built and deployed full-stack web applications for
+                          small businesses
+                        </li>
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Developed custom automation scripts and data pipelines
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-slate-900">
+                        Junior Software Developer
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        Smadex &middot; 2024–2025
+                      </p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Contributed to the development of a real-time bidding
+                          platform
+                        </li>
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Built and maintained RESTful APIs and data processing
+                          pipelines
+                        </li>
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 mt-1.5">-</span>
+                          Collaborated in an agile team using CI/CD and code
+                          review practices
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+
+      {/* CV */}
+      <Section id="cv" title="CV">
+        <a
+          href="/cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-3 px-6 py-3 bg-slate-900 text-white text-sm font-medium rounded-lg hover:bg-slate-800 transition-colors duration-200"
+        >
+          <FaFilePdf className="text-lg" />
+          View CV (PDF)
+        </a>
+      </Section>
+
+      {/* Contact */}
+      <div className="bg-slate-50">
+        <Section id="contact" title="Contact">
+          <p className="text-slate-500 text-sm mb-4 max-w-lg">
+            Feel free to reach out if you'd like to collaborate or just say hi.
+          </p>
+          <div className="flex gap-3">
             <a
-              href="https://github.com/G0nzal0zz/educational-multiparty-agents"
+              href="mailto:larroyagonzalo@gmail.com"
+              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-blue-700 transition-colors duration-200"
+            >
+              <FaEnvelope />
+            </a>
+            <a
+              href="https://github.com/G0nzal0zz"
               target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 inline-block text-gray-600 hover:text-blue-500 text-2xl"
+              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
             >
               <FaGithub />
             </a>
+            <a
+              href="https://linkedin.com/in/gonzalo-larroya"
+              target="_blank"
+              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
+            >
+              <FaLinkedin />
+            </a>
           </div>
-          <div className="p-6 border rounded-lg">
-            <h3>Project 2</h3>
-            <p className="mt-2 text-gray-600">
-              Description of your second project.
-            </p>
-          </div>
-          <div className="p-6 border rounded-lg">
-            <h3>Project 3</h3>
-            <p className="mt-2 text-gray-600">
-              Description of your third project.
-            </p>
-          </div>
-          <div className="p-6 border rounded-lg">
-            <h3>Project 4</h3>
-            <p className="mt-2 text-gray-600">
-              Description of your fourth project.
-            </p>
-          </div>
-        </div>
-      </section>
+        </Section>
+      </div>
 
-      {/* Education Section */}
-      <section id="education" className="global-margin py-8">
-        <h2>Education</h2>
-        <div className="mt-4 space-y-6">
-          <div className="border-l-2 border-blue-500 pl-4">
-            <h3>MSc in Artificial Intelligence</h3>
-            <p className="text-gray-600">Heriot-Watt University</p>
-            <p className="text-gray-500">Edinburgh, UK</p>
-            <p className="text-gray-400">2025 - 2026</p>
-          </div>
-          <div className="border-l-2 border-gray-300 pl-4">
-            <h3>Bachelor's Degree in Software Engineering</h3>
-            <p className="text-gray-600">
-              Epitech European Institute of technology
-            </p>
-            <p className="text-gray-500">Barcelona, Spain</p>
-            <p className="text-gray-400">2022 - 2025</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Work Section */}
-      <section id="work" className="global-margin py-8">
-        <h2>Experience</h2>
-        <div className="mt-4 space-y-6">
-          <div className="border-l-2 border-blue-500 pl-4">
-            <h3>Freelance</h3>
-            <p className="text-gray-400">August 2025 - Present</p>
-          </div>
-        </div>
-        <div className="mt-4 space-y-6">
-          <div className="border-l-2 border-gray-300 pl-4">
-            <h3>Junior Software Developer</h3>
-            <p className="text-gray-600">Smadex</p>
-            <p className="text-gray-500">Barcelona</p>
-            <p className="text-gray-400">October 2024 - September 2025</p>
-          </div>
-          <div className="border-l-2 border-gray-300 pl-4">
-            <h3>Intern Software Developer</h3>
-            <p className="text-gray-600">Avvena</p>
-            <p className="text-gray-500">Barcelona</p>
-            <p className="text-gray-400">July 2023 - December 2023</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section id="contact" className="global-margin py-8">
-        <h2>Contact</h2>
-        <p className="mt-4 text-gray-600">
-          Feel free to reach out to me at{' '}
-          <a
-            href="mailto:larroyagonzalo+contact@gmail.com"
-            className="text-blue-500 hover:underline"
-          >
-            larroyagonzalo@gmail.com
-          </a>
-        </p>
-        <div className="mt-6 flex gap-4">
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-blue-500"
-          >
-            GitHub
-          </a>
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-blue-500"
-          >
-            LinkedIn
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="global-margin py-10 border-t">
-        <p className="text-gray-500">© 2024 Gonzalo</p>
+      <footer className="global-margin py-10 border-t border-slate-200 text-sm text-slate-400">
+        &copy; 2026 Gonzalo
       </footer>
     </div>
   )

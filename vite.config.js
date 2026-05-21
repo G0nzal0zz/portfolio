@@ -10,7 +10,7 @@ export default defineConfig({
     viteReact(),
     tailwindcss(),
   ],
-  base: '/portfolio/',
+  base: '',
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),

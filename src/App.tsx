@@ -142,7 +142,7 @@ function App() {
         className="global-margin pt-24 pb-16 md:pt-32 md:pb-20"
       >
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-          Gonzalo
+          Gonzalo Larroya
         </h1>
         <p className="mt-4 text-slate-500 max-w-xl text-lg">
           Junior Developer &middot; MSc Artificial Intelligence &middot;

@@ -324,7 +324,6 @@ function App() {
               ]}
             />
 
-
             <ProjectCard
               media={
                 <img
@@ -376,7 +375,9 @@ function App() {
               <div className="space-y-6">
                 <Card>
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-900 shrink-0" />
+                    <span className="mt-0.5 text-slate-900 text-lg leading-none shrink-0">
+                      &bull;
+                    </span>
                     <div>
                       <h3 className="font-semibold text-slate-900">
                         MSc Artificial Intelligence
@@ -397,7 +398,9 @@ function App() {
 
                 <Card>
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <span className="mt-0.5 text-slate-400 text-lg leading-none shrink-0">
+                      &bull;
+                    </span>
                     <div>
                       <h3 className="font-semibold text-slate-900">
                         BSc Software Engineering
@@ -425,10 +428,16 @@ function App() {
               <div className="space-y-6">
                 <Card>
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-900 shrink-0" />
+                    <span className="mt-0.5 text-slate-900 text-lg leading-none shrink-0">
+                      &bull;
+                    </span>
                     <div>
-                      <h3 className="font-semibold text-slate-900">Freelancing</h3>
-                      <p className="text-slate-500 text-sm">Sep 2025 – Present</p>
+                      <h3 className="font-semibold text-slate-900">
+                        Freelancing
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        Sep 2025 – Present
+                      </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300">-</span>
@@ -441,26 +450,30 @@ function App() {
 
                 <Card>
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <span className="mt-0.5 text-slate-400 text-lg leading-none shrink-0">
+                      &bull;
+                    </span>
                     <div>
                       <h3 className="font-semibold text-slate-900">
-                        Junior Software Engineer
+                        Junior Software Engineer &middot; Smadex
                       </h3>
-                      <p className="text-slate-500 text-sm">
-                        Smadex &middot; Oct 2024 – Sep 2025 &middot; Barcelona, Spain
+                      <p className="text-slate-400 text-sm">
+                        Oct 2024 – Sep 2025 &middot; Barcelona, Spain
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300">-</span>
-                          Maintained Angular frontend and Node.js backend; designed cloud architectures.
+                          Maintained Angular frontend and Node.js backend.
                         </li>
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300">-</span>
-                          Built AI agentic solutions and secure auth workflows (OAuth).
+                          Built AI agentic solutions and secure auth workflows
+                          (OAuth).
                         </li>
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300">-</span>
-                          Worked with monolithic and microservices architectures.
+                          Worked with monolithic and microservices
+                          architectures.
                         </li>
                       </ul>
                     </div>
@@ -469,22 +482,26 @@ function App() {
 
                 <Card>
                   <div className="flex items-start gap-3">
-                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <span className="mt-0.5 text-slate-400 text-lg leading-none shrink-0">
+                      &bull;
+                    </span>
                     <div>
                       <h3 className="font-semibold text-slate-900">
-                        Intern Software Developer
+                        Intern Software Developer &middot; Avvena
                       </h3>
-                      <p className="text-slate-500 text-sm">
-                        Avvena &middot; Jul 2023 – Dec 2023 &middot; Barcelona, Spain
+                      <p className="text-slate-400 text-sm">
+                        Jul 2023 – Dec 2023 &middot; Barcelona, Spain
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300 ">-</span>
-                          Built a landing page with Next.js and maintained Java/Spring Boot backend.
+                          Built a landing page with Next.js and maintained
+                          Java/Spring Boot backend.
                         </li>
                         <li className="text-slate-600 text-sm flex items-start gap-2">
                           <span className="text-slate-300">-</span>
-                          Collaborated with non-technical teams to align product solutions.
+                          Collaborated with non-technical teams to align product
+                          solutions.
                         </li>
                       </ul>
                     </div>

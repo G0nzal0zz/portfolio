@@ -1,36 +1,42 @@
-import type { ReactNode } from 'react'
-const base = import.meta.env.BASE_URL
+import { useState } from 'react'
 import {
+  FaBook,
+  FaDatabase,
+  FaEnvelope,
+  FaFilePdf,
   FaGithub,
   FaLinkedin,
   FaPython,
   FaReact,
-  FaDatabase,
   FaTools,
-  FaBook,
-  FaFilePdf,
-  FaEnvelope,
 } from 'react-icons/fa'
-import { SiPytorch, SiHaskell, SiLlvm, SiLangchain } from 'react-icons/si'
+import { SiHaskell, SiLangchain, SiLlvm, SiPytorch } from 'react-icons/si'
+import type { ReactNode } from 'react'
 import Header from '@/components/Header'
+
+const base = import.meta.env.BASE_URL
 
 function Section({
   id,
   title,
+  subtitle,
   children,
-  className = '',
 }: {
   id: string
   title: string
   subtitle?: string
   children: ReactNode
-  className?: string
 }) {
   return (
-    <section id={id} className={`global-margin py-16 md:py-20 ${className}`}>
-      <div className="mb-10">
+    <section id={id} className="global-margin py-16 md:py-20">
+      <div className={subtitle ? 'mb-4' : 'mb-10'}>
         <h2>{title}</h2>
       </div>
+
+      {subtitle && (
+        <p className="text-slate-500 text-sm mb-8 max-w-lg">{subtitle}</p>
+      )}
+
       {children}
     </section>
   )
@@ -71,8 +77,8 @@ type ProjectCardProps = {
   media?: ReactNode
   title: string
   description: string
-  tags: { icon: ReactNode; label: string }[]
-  links?: ProjectLink[]
+  tags: Array<{ icon: ReactNode; label: string }>
+  links?: Array<ProjectLink>
 }
 
 function ProjectCard({
@@ -113,20 +119,50 @@ function ProjectCard({
   )
 }
 
+type TechGroup = {
+  label: string
+  items: Array<string>
+}
+
 type TechCardProps = {
   icon: ReactNode
   title: string
-  items: string[]
+  items: Array<string>
+  groups?: Array<TechGroup>
 }
 
-function TechCard({ icon, title, items }: TechCardProps) {
+function TechCard({ icon, title, items, groups }: TechCardProps) {
+  const [expanded, setExpanded] = useState(false)
+  const hasGroups = groups && groups.length > 0
+
   return (
-    <Card>
+    <Card className={hasGroups ? 'cursor-pointer select-none' : ''}>
       <div className="flex items-center gap-2 font-medium text-slate-900 text-sm">
-        <span className="text-blue-700">{icon}</span>
+        <span className="text-slate-600">{icon}</span>
         {title}
       </div>
-      <p className="mt-2 text-slate-500 text-sm">{items.join(', ')}</p>
+      {!expanded ? (
+        <p className="mt-2 text-slate-500 text-sm">{items.join(', ')}</p>
+      ) : (
+        <div className="mt-3 space-y-2">
+          {groups!.map((group, i) => (
+            <div key={i}>
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
+                {group.label}
+              </span>
+              <p className="text-slate-500 text-sm">{group.items.join(', ')}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      {hasGroups && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="mt-2 text-xs text-blue-600 hover:text-blue-700 transition-colors"
+        >
+          {expanded ? 'Show less' : 'Show details'}
+        </button>
+      )}
     </Card>
   )
 }
@@ -167,12 +203,27 @@ function App() {
           <TechCard
             icon={<FaPython />}
             title="Languages"
-            items={['Python', 'TypeScript', 'JavaScript', 'Java']}
+            items={[
+              'Python',
+              'TypeScript',
+              'JavaScript',
+              'Java',
+              'Haskell',
+              'Go',
+            ]}
+            groups={[
+              { label: 'Functional', items: ['Haskell'] },
+              { label: 'Object-Oriented', items: ['Java', 'Python'] },
+              {
+                label: 'Multi-Paradigm',
+                items: ['Python', 'TypeScript', 'JavaScript', 'Go'],
+              },
+            ]}
           />
           <TechCard
             icon={<FaReact />}
             title="Web"
-            items={['React', 'Vue', 'Node.js', 'HTML', 'CSS']}
+            items={['React', 'Node.js', 'HTML', 'CSS']}
           />
           <TechCard
             icon={<FaDatabase />}
@@ -188,6 +239,13 @@ function App() {
             icon={<SiPytorch />}
             title="AI / ML"
             items={['PyTorch', 'TensorFlow', 'LangChain']}
+          />
+          <TechCard
+            icon={
+              <img src={`${base}rocq.svg`} className="w-4 h-4" alt="Rocq" />
+            }
+            title="Verification"
+            items={['Rocq']}
           />
         </div>
       </Section>
@@ -269,7 +327,11 @@ function App() {
               tags={[
                 {
                   icon: (
-                    <img src={`${base}rocq.svg`} className="w-3.5 h-3.5" alt="Rocq" />
+                    <img
+                      src={`${base}rocq.svg`}
+                      className="w-3.5 h-3.5"
+                      alt="Rocq"
+                    />
                   ),
                   label: 'Rocq',
                 },
@@ -419,30 +481,40 @@ function App() {
 
       {/* Contact */}
       <div className="bg-slate-50">
-        <Section id="contact" title="Contact" className="pb-8 md:pb-12">
-          <p className="text-slate-500 text-sm mb-4 max-w-lg">
-            Feel free to reach out!
-          </p>
+        <Section
+          id="contact"
+          title="Contact"
+          subtitle="Feel free to reach out!"
+        >
           <div className="flex gap-3">
             <a
               href="mailto:larroyagonzalo@gmail.com"
-              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-blue-700 transition-colors duration-200"
+              className="h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-blue-700 transition-colors duration-200"
             >
-              <FaEnvelope />
+              <div className="flex gap-3 justify-center items-center px-3">
+                <FaEnvelope />
+                Email
+              </div>
             </a>
             <a
               href="https://github.com/G0nzal0zz"
               target="_blank"
-              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
+              className="h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
             >
-              <FaGithub />
+              <div className="flex gap-3 justify-center items-center px-3">
+                <FaGithub />
+                Github
+              </div>
             </a>
             <a
               href="https://linkedin.com/in/gonzalo-larroya"
               target="_blank"
-              className="w-11 h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
+              className="h-11 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center justify-center hover:border-slate-300 hover:text-slate-700 transition-colors duration-200"
             >
-              <FaLinkedin />
+              <div className="flex gap-3 justify-center items-center px-3">
+                <FaLinkedin />
+                LinkedIn
+              </div>
             </a>
           </div>
         </Section>

@@ -161,7 +161,7 @@ function TechCard({ icon, title, items, groups }: TechCardProps) {
       {hasGroups && (
         <button
           onClick={() => setExpanded(!expanded)}
-          className="mt-2 text-xs text-blue-600 hover:text-blue-700 transition-colors"
+          className="mt-2 text-xs text-blue-600 hover:text-blue-700 transition-colors self-start"
         >
           {expanded ? 'Show less' : 'Show details'}
         </button>
@@ -216,7 +216,7 @@ function App() {
             ]}
             groups={[
               { label: 'Functional', items: ['Haskell'] },
-              { label: 'Object-Oriented', items: ['Java', 'Python'] },
+              { label: 'Object-Oriented', items: ['Java'] },
               {
                 label: 'Multi-Paradigm',
                 items: ['Python', 'TypeScript', 'JavaScript', 'Go'],

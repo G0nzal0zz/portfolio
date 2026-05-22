@@ -5,6 +5,8 @@ import {
   FaEnvelope,
   FaFilePdf,
   FaGithub,
+  FaGlobe,
+  FaHtml5,
   FaLinkedin,
   FaPython,
   FaReact,
@@ -13,6 +15,7 @@ import {
 import { SiHaskell, SiLangchain, SiLlvm, SiPytorch } from 'react-icons/si'
 import type { ReactNode } from 'react'
 import Header from '@/components/Header'
+import { FaCss } from 'react-icons/fa6'
 
 const base = import.meta.env.BASE_URL
 
@@ -51,7 +54,7 @@ function Card({
 }) {
   return (
     <div
-      className={`p-6 border border-slate-200 rounded-xl card-hover bg-white ${className}`}
+      className={`p-6 border border-slate-200 rounded-xl card-hover bg-white flex flex-col ${className}`}
     >
       {children}
     </div>
@@ -90,9 +93,9 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Card>
-      {media && <div className="-mx-6 -mt-6 mb-4">{media}</div>}
+      {media && <div className="-mx-6 -mt-6 mb-4 overflow-hidden rounded-t-xl">{media}</div>}
       <h3 className="font-semibold text-lg">{title}</h3>
-      <p className="mt-1.5 text-slate-600 text-sm leading-relaxed">
+      <p className="mt-1.5 text-slate-600 text-sm leading-relaxed grow">
         {description}
       </p>
       <div className="mt-3 flex flex-wrap gap-1.5">
@@ -254,6 +257,7 @@ function App() {
       <div className="bg-slate-50">
         <Section id="projects" title="Projects">
           <div className="grid gap-6 md:grid-cols-2">
+
             <ProjectCard
               media={
                 <div className="w-full aspect-[4/3] bg-slate-100">
@@ -357,6 +361,32 @@ function App() {
                   href: 'https://github.com/G0nzal0zz/hide_and_peek_verification',
                   icon: <FaGithub />,
                   label: 'Code',
+                },
+              ]}
+            />
+            <ProjectCard
+              media={
+                <img
+                  src={`${base}gym.png`}
+                  alt="Gym website"
+                  className="w-full aspect-[4/3] object-cover bg-slate-100"
+                />
+              }
+              title="Gym Website"
+              description={
+                <>
+                  Designed, created and deployed a <strong>responsive website</strong> for a gym.
+                </>
+              }
+              tags={[
+                { icon: <FaHtml5 />, label: 'HTML' },
+                { icon: <FaCss />, label: 'CSS' },
+              ]}
+              links={[
+                {
+                  href: 'https://dysbajocinca.com',
+                  icon: <FaGlobe />,
+                  label: 'Website',
                 },
               ]}
             />

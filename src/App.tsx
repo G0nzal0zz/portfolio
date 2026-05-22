@@ -16,6 +16,7 @@ import { SiHaskell, SiLangchain, SiLlvm, SiPytorch } from 'react-icons/si'
 import type { ReactNode } from 'react'
 import Header from '@/components/Header'
 import { FaCss } from 'react-icons/fa6'
+import { MdVerified } from 'react-icons/md'
 
 const base = import.meta.env.BASE_URL
 
@@ -212,7 +213,7 @@ function App() {
               'JavaScript',
               'Java',
               'Haskell',
-              'Go',
+              'Go...',
             ]}
             groups={[
               { label: 'Functional', items: ['Haskell'] },
@@ -224,7 +225,7 @@ function App() {
             ]}
           />
           <TechCard
-            icon={<FaReact />}
+            icon={<FaReact size={18}/>}
             title="Web"
             items={['React', 'Node.js', 'HTML', 'CSS']}
           />
@@ -244,9 +245,7 @@ function App() {
             items={['PyTorch', 'TensorFlow', 'LangChain']}
           />
           <TechCard
-            icon={
-              <img src={`${base}rocq.svg`} className="w-4 h-4" alt="Rocq" />
-            }
+            icon={ <MdVerified size={18}/> }
             title="Verification"
             items={['Rocq']}
           />

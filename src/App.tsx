@@ -76,7 +76,7 @@ type ProjectLink = {
 type ProjectCardProps = {
   media?: ReactNode
   title: string
-  description: string
+  description: ReactNode
   tags: Array<{ icon: ReactNode; label: string }>
   links?: Array<ProjectLink>
 }
@@ -256,29 +256,6 @@ function App() {
           <div className="grid gap-6 md:grid-cols-2">
             <ProjectCard
               media={
-                <img
-                  src={`${base}system.png`}
-                  alt="System"
-                  className="w-full aspect-[4/3] object-cover bg-slate-100"
-                />
-              }
-              title="Educational Multiparty Agents"
-              description="Multi-agent educational system exploring collaborative AI interactions."
-              tags={[
-                { icon: <FaPython />, label: 'Python' },
-                { icon: <SiLangchain />, label: 'LangChain' },
-              ]}
-              links={[
-                {
-                  href: 'https://github.com/G0nzal0zz/educational-multiparty-agents',
-                  icon: <FaGithub />,
-                  label: 'Code',
-                },
-              ]}
-            />
-
-            <ProjectCard
-              media={
                 <div className="w-full aspect-[4/3] bg-slate-100">
                   <iframe
                     src="https://www.youtube.com/embed/UYt2HwnQzyE"
@@ -290,7 +267,12 @@ function App() {
                 </div>
               }
               title="Frostlang"
-              description="Programming language created in Haskell that combines the speed of C with modern language features."
+              description={
+                <>
+                  <strong>Programming language</strong> created in Haskell that
+                  combines the speed of C with modern language features.
+                </>
+              }
               tags={[
                 { icon: <SiHaskell />, label: 'Haskell' },
                 { icon: <SiLlvm />, label: 'LLVM' },
@@ -317,13 +299,47 @@ function App() {
             <ProjectCard
               media={
                 <img
+                  src={`${base}system.png`}
+                  alt="System"
+                  className="w-full aspect-[4/3] object-contain bg-slate-100"
+                />
+              }
+              title="Educational Agents"
+              description={
+                <>
+                  Educational <strong>spoken dialogue system</strong> with AI
+                  teacher and student agents that help a human learner.
+                </>
+              }
+              tags={[
+                { icon: <FaPython />, label: 'Python' },
+                { icon: <SiLangchain />, label: 'LangChain' },
+              ]}
+              links={[
+                {
+                  href: 'https://github.com/G0nzal0zz/educational-multiparty-agents',
+                  icon: <FaGithub />,
+                  label: 'Code',
+                },
+              ]}
+            />
+
+
+            <ProjectCard
+              media={
+                <img
                   src={`${base}hide_and_peek.webp`}
                   alt="System"
                   className="w-full aspect-[4/3] object-cover bg-slate-100"
                 />
               }
-              title="(WII Party) Hide and Peek Strategy Verification"
-              description="Verification of a game strategy using Rocq proof assistant."
+              title="Hide and Peek Strategy Verification"
+              description={
+                <>
+                  Formally proving the <strong>optimal strategy</strong> for
+                  Hide and Peek (Wii Party) in Rocq.{' '}
+                </>
+              }
               tags={[
                 {
                   icon: (
@@ -370,7 +386,7 @@ function App() {
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
+                          <span className="text-slate-300">-</span>
                           Specialising in machine learning, NLP, and multi-agent
                           systems
                         </li>
@@ -391,7 +407,7 @@ function App() {
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
+                          <span className="text-slate-300">-</span>
                           Project-based curriculum covering full-stack
                           development, algorithms, and system design
                         </li>
@@ -411,19 +427,12 @@ function App() {
                   <div className="flex items-start gap-3">
                     <div className="mt-1 w-2 h-2 rounded-full bg-slate-900 shrink-0" />
                     <div>
-                      <h3 className="font-semibold text-slate-900">
-                        Freelance
-                      </h3>
-                      <p className="text-slate-500 text-sm">2025 – Present</p>
+                      <h3 className="font-semibold text-slate-900">Freelancing</h3>
+                      <p className="text-slate-500 text-sm">Sep 2025 – Present</p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
-                          Built and deployed full-stack web applications for
-                          small businesses
-                        </li>
-                        <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
-                          Developed custom automation scripts and data pipelines
+                          <span className="text-slate-300">-</span>
+                          Building custom websites and AI solutions for clients.
                         </li>
                       </ul>
                     </div>
@@ -435,26 +444,47 @@ function App() {
                     <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
                     <div>
                       <h3 className="font-semibold text-slate-900">
-                        Junior Software Developer
+                        Junior Software Engineer
                       </h3>
                       <p className="text-slate-500 text-sm">
-                        Smadex &middot; 2024–2025
+                        Smadex &middot; Oct 2024 – Sep 2025 &middot; Barcelona, Spain
                       </p>
                       <ul className="mt-3 space-y-1">
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
-                          Contributed to the development of a real-time bidding
-                          platform
+                          <span className="text-slate-300">-</span>
+                          Maintained Angular frontend and Node.js backend; designed cloud architectures.
                         </li>
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
-                          Built and maintained RESTful APIs and data processing
-                          pipelines
+                          <span className="text-slate-300">-</span>
+                          Built AI agentic solutions and secure auth workflows (OAuth).
                         </li>
                         <li className="text-slate-600 text-sm flex items-start gap-2">
-                          <span className="text-slate-300 mt-1.5">-</span>
-                          Collaborated in an agile team using CI/CD and code
-                          review practices
+                          <span className="text-slate-300">-</span>
+                          Worked with monolithic and microservices architectures.
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </Card>
+
+                <Card>
+                  <div className="flex items-start gap-3">
+                    <div className="mt-1 w-2 h-2 rounded-full bg-slate-400 shrink-0" />
+                    <div>
+                      <h3 className="font-semibold text-slate-900">
+                        Intern Software Developer
+                      </h3>
+                      <p className="text-slate-500 text-sm">
+                        Avvena &middot; Jul 2023 – Dec 2023 &middot; Barcelona, Spain
+                      </p>
+                      <ul className="mt-3 space-y-1">
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300 ">-</span>
+                          Built a landing page with Next.js and maintained Java/Spring Boot backend.
+                        </li>
+                        <li className="text-slate-600 text-sm flex items-start gap-2">
+                          <span className="text-slate-300">-</span>
+                          Collaborated with non-technical teams to align product solutions.
                         </li>
                       </ul>
                     </div>
